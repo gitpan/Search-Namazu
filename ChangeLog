@@ -1,3 +1,9 @@
+2006-06-06  NOKUBI Takatsugu  <knok@daionet.gr.jp>
+
+	* Namazu.xs: Defined SvPV_nolen if it is not defined.
+
+	* Version 0.95.
+
 2006-05-30  NOKUBI Takatsugu  <knok@daionet.gr.jp>
 
 	* Namazu.xs: Added workaround for perl 5.6.0

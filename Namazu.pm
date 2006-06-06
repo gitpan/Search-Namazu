@@ -19,7 +19,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA
 #
-# $Id: Namazu.pm 261 2006-05-29 22:49:05Z knok $
+# $Id: Namazu.pm 264 2006-06-06 06:36:10Z knok $
 #
 
 package Search::Namazu;
@@ -257,7 +257,7 @@ NMZ_NOT_SPECIFIED_INDEX NMZ_ERR_INDEX NMZ_ERR_EMPTY_QUERY
 NMZ_ERR_RESULT_EXCEEDED);
 # %EXPORT_TAGS = (all => [qw()]);
 
-$VERSION = '0.94';
+$VERSION = '0.95';
 
 bootstrap Search::Namazu $VERSION;
 

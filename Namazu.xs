@@ -20,7 +20,7 @@ Namazu.xs
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA
 
-$Id: Namazu.xs 261 2006-05-29 22:49:05Z knok $
+$Id: Namazu.xs 264 2006-06-06 06:36:10Z knok $
 
 */
 
@@ -52,6 +52,9 @@ extern "C" {
 #endif
 #if !defined(PL_sv_undef) && defined(sv_undef)
 #define PL_sv_undef sv_undef
+#endif
+#if !defined(SvPV_nolen) /* for perl 5.005 */
+#define SvPV_nolen(x) SvPV(x, PL_na)
 #endif
 
 #define SEARCH_NAMAZU_FIELDS 5

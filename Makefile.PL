@@ -1,7 +1,7 @@
 #
 # Makefile.PL for Search::Namazu
 #
-# $Id: Makefile.PL 261 2006-05-29 22:49:05Z knok $
+# $Id: Makefile.PL 264 2006-06-06 06:36:10Z knok $
 #
 
 use ExtUtils::MakeMaker;
