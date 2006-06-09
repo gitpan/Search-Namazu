@@ -1,4 +1,4 @@
-# $Id: 01-mkindex.t 264 2006-06-06 06:36:10Z knok $
+# $Id: 01-mkindex.t 267 2006-06-09 05:43:51Z knok $
 #
 
 use strict;

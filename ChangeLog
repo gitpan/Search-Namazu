@@ -1,3 +1,10 @@
+2006-06-09  NOKUBI Takatsugu  <knok@daionet.gr.jp>
+
+	* Namazu.xs: Fixed segfault bug on perl 5.005_03.
+	  (Patched by Tadamasa Teranishi, thank you)
+
+	* Version 0.96.
+
 2006-06-06  NOKUBI Takatsugu  <knok@daionet.gr.jp>
 
 	* Namazu.xs: Defined SvPV_nolen if it is not defined.

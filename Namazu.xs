@@ -20,7 +20,7 @@ Namazu.xs
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA
 
-$Id: Namazu.xs 264 2006-06-06 06:36:10Z knok $
+$Id: Namazu.xs 268 2006-06-09 05:48:57Z knok $
 
 */
 
@@ -195,22 +195,24 @@ call_search_main(query, maxget)
 
 	PPCODE:
 		char *qstr;
+                char buffer[BUFSIZE];
 		char cqstr[BUFSIZE * 2];
 		AV *retar;
 		int i;
 
 		qstr = SvPV(query, PL_na);
-		nmz_codeconv_query(qstr);
-		strcpy(cqstr, qstr);
+                strncpy(buffer, qstr, BUFSIZE);
+                buffer[BUFSIZE - 1] = '\0';
+		nmz_codeconv_query(buffer);
+		strcpy(cqstr, buffer);
 		retar = call_search_main_c(cqstr, maxget);
 #if ! defined(PERL_VERSION) || (PERL_VERSION == 6 && PERL_SUBVERSION == 0)
 		{ /* workaround for only one result */
-			SV *ohlist = perl_eval_pv("new Search::Namazu::Result", TRUE);
-			XPUSHs(ohlist);
+                        SPAGAIN;
 		}
 #endif /* PERL_VERSION */
 		while (av_len(retar) >= 0) {
-			XPUSHs(av_pop(retar));
+			XPUSHs(av_shift(retar));
 		}
 		nmz_free_internal();
 
@@ -221,13 +223,16 @@ call_search_main_ref(query, maxget)
 
 	CODE:
 		char *qstr;
+                char buffer[BUFSIZE];
 		char cqstr[BUFSIZE * 2];
 		AV *retar;
 		int i;
 
 		qstr = SvPV(query, PL_na);
-		nmz_codeconv_query(qstr);
-		strcpy(cqstr, qstr);
+                strncpy(buffer, qstr, BUFSIZE);
+                buffer[BUFSIZE - 1] = '\0';
+                nmz_codeconv_query(buffer);
+                strcpy(cqstr, buffer);
 		retar = call_search_main_c(cqstr, maxget);
 		nmz_free_internal();
 		RETVAL = newRV_inc((SV*) retar);
@@ -242,6 +247,7 @@ call_search_main_fields(query, maxget, fieldref)
 
 	CODE:
 		char *qstr;
+                char buffer[BUFSIZE];
 		char cqstr[BUFSIZE * 2];
 		AV *retar;
 		AV *fields;
@@ -249,8 +255,10 @@ call_search_main_fields(query, maxget, fieldref)
 
 		fields = (AV *) SvRV(fieldref);
 		qstr = SvPV(query, PL_na);
-		nmz_codeconv_query(qstr);
-		strcpy(cqstr, qstr);
+                strncpy(buffer, qstr, BUFSIZE);
+                buffer[BUFSIZE - 1] = '\0';
+                nmz_codeconv_query(buffer);
+                strcpy(cqstr, buffer);
 		retar = call_search_main_fields_c(cqstr, maxget, fields);
 		nmz_free_internal();
 		RETVAL = newRV_inc((SV*) retar);
